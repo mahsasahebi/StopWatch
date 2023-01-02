@@ -5,6 +5,7 @@ class StopWatch2 {
     sec: number;
     ms: number;
     status: Status;
+    private myInterval: number;
     static quantity: number=0;
     constructor() {
         StopWatch2.quantity++;
@@ -13,10 +14,11 @@ class StopWatch2 {
         this.sec = 0;
         this.ms = 0;
     }
+    
     private timer() {
         
         document.getElementById("ms").innerText = this.ms.toString();
-        if(this.ms==99){
+        if(this.ms==9){
             this.sec++;
             document.getElementById("sec").innerText = this.sec.toString();
             this.ms =0;
@@ -36,8 +38,6 @@ class StopWatch2 {
         }
     }
     
-
-    
     
 
     start() {
@@ -47,13 +47,17 @@ class StopWatch2 {
         }
         else {
         this.status=Status.STARTED; 
-        let myInterval=setInterval(()=>this.timer(), 10);
-         console.log(myInterval);
+        this.myInterval=setInterval(()=>this.timer(), 100);
+         console.log(this.myInterval);
         }
+
+        
+        
+
     }
     stop() {
         this.status=Status.STOPPED; 
-        window.clearInterval(1);
+        window.clearInterval(this.myInterval);
     }
     reset() {
         this.hour = 0;
