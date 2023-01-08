@@ -31,7 +31,7 @@ class StopWatch2 {
     }
     start() {
         if (this.status == Status.STARTED) {
-            throw ("already started");
+            throw new Error("already started");
         }
         else {
             this.status = Status.STARTED;
@@ -40,8 +40,13 @@ class StopWatch2 {
         }
     }
     stop() {
-        this.status = Status.STOPPED;
-        window.clearInterval(this.myInterval);
+        if (this.status == Status.STOPPED) {
+            throw new Error("already stopped");
+        }
+        else {
+            this.status = Status.STOPPED;
+            window.clearInterval(this.myInterval);
+        }
     }
     reset() {
         this.hour = 0;

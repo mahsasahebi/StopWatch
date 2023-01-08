@@ -15,7 +15,7 @@ class StopWatch2 {
         this.ms = 0;
     }
     
-    private timer() {
+    private timer():void {
         
         document.getElementById("ms").innerText = this.ms.toString();
         if(this.ms==9){
@@ -38,12 +38,11 @@ class StopWatch2 {
         }
     }
     
-    
 
     start() {
         if (this.status==Status.STARTED)
         {
-            throw  ("already started");
+            throw  new Error("already started");
         }
         else {
         this.status=Status.STARTED; 
@@ -53,11 +52,18 @@ class StopWatch2 {
 
         
         
+        
 
     }
     stop() {
+        if (this.status==Status.STOPPED)
+        {
+            throw  new Error("already stopped");
+        }
+        else {
         this.status=Status.STOPPED; 
         window.clearInterval(this.myInterval);
+        }
     }
     reset() {
         this.hour = 0;
